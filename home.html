@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/9ea9f05497.js" crossorigin="anonymous"></script>
+    <title>Pearle | Your AI Travel Agent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-cta {
+            background: #4b247d;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: #3b1c63;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 0 6rem;
+            background: linear-gradient(135deg, #dccfe7 0%, #f3f0f8 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4b247d;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #4b247d;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #3b1c63;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #4b247d;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #8e70c1;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: #dccfe7;
+            border-color: #4b247d;
+            transform: translateY(-1px);
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .problem-card {
+            background: #dccfe7;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #8e70c1;
+            text-align: center;
+        }
+
+        .problem-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .problem-description {
+            color: #64748b;
+        }
+
+        /* Features */
+        .features-section {
+            padding: 6rem 0;
+            background: #dccfe7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid #8e70c1;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(75, 36, 125, 0.15);
+            border-color: #4b247d;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #4b247d;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .feature-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .feature-benefit {
+            color: #4b247d;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: #dccfe7;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 6rem 0;
+            background: white;
+            text-align: center;
+        }
+
+        .testimonial {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #dccfe7;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid #8e70c1;
+        }
+
+        .testimonial-text {
+            font-size: 1.25rem;
+            color: #1e293b;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #4b247d;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 6rem 0;
+            background: #4b247d;
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.25rem;
+            color: #dccfe7;
+            margin-bottom: 2rem;
+        }
+
+        .waitlist-stats {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .final-cta .btn-primary {
+            background: #8e70c1;
+            font-size: 1.1rem;
+            padding: 1.2rem 2.5rem;
+        }
+
+        .final-cta .btn-primary:hover {
+            background: #7a5db0;
+        }
+
+        .launch-info {
+            margin-top: 2rem;
+            color: #dccfe7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .features-grid, .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+          <img src="/Users/CourtneyKo1/Documents/Pearle/Variation 1.3b.png" alt="Pearle" class="logo">
+            <a href="#waitlist" class="nav-cta">Get Early Access</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Turn Travel Chaos<br>Into Perfect Trips</h1>
+            <p class="hero-subtitle">The AI travel agent that handles everything from viral TikTok spots to splitting dinner bills. No more spreadsheets, no more stress.</p>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Group Alignment</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Tools Replaced by One</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">0</span>
+                    <span class="stat-label">Spreadsheets Needed</span>
+                </div>
+            </div>
+
+            <div class="cta-group">
+                <a href="#waitlist" class="btn-primary">Join for Early Access</a>
+                <a href="#features" class="btn-secondary">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <div class="container">
+            <h2 class="section-title">Travel Planning Shouldn't Be This Hard</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-emoji">🤯</div>
+                    <h3 class="problem-title">Research Overwhelm</h3>
+                    <p class="problem-description">Endless tabs, conflicting reviews, and you still don't know if that restaurant is actually worth the hype.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-emoji">💸</div>
+                    <h3 class="problem-title">Budget Surprises</h3>
+                    <p class="problem-description">Plan for $2,000, spend $3,500. Hidden costs and spontaneous "must-do" activities destroy your budget.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-emoji">📱</div>
+                    <h3 class="problem-title">Group Chat Hell</h3>
+                    <p class="problem-description">127 unread messages about where to eat dinner. Everyone wants something different and nobody can decide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Meet Your Travel Superpower</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3 class="feature-title">From Viral to Itinerary</h3>
+                    <p class="feature-description">Spotted an amazing café in a Tokyo vlog? Just share the link. Pearle finds the exact location, checks reviews, and adds it to your itinerary with travel times.</p>
+                    <span class="feature-benefit">⚡ Save 3+ hours of detective work</span>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">AI That Gets Your Vibe</h3>
+                    <p class="feature-description">Tell Pearle you want "cozy coffee shops, no tourist traps" and get personalized recommendations that actually match your style, not generic top-10 lists.</p>
+                    <span class="feature-benefit">💡 Discover hidden gems that fit you</span>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Smart Group Decisions</h3>
+                    <p class="feature-description">Built-in voting for activities and restaurants. Pearle learns everyone's preferences and suggests compromises that actually work.</p>
+                    <span class="feature-benefit">✅ End group indecision forever</span>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Effortless Money Management</h3>
+                    <p class="feature-description">Auto-split costs, track expenses, and get budget alerts. Pearle finds cheaper alternatives and negotiates group discounts automatically.</p>
+                    <span class="feature-benefit">💸 Save $500+ per group trip</span>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3 class="feature-title">Shared Memory Feed</h3>
+                    <p class="feature-description">Everyone's photos sync automatically. Pearle creates highlight reels and suggests the best shots for your social media.</p>
+                    <span class="feature-benefit">📱 Never lose a travel memory</span>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Shared Plans, Shared Rewards</h3>
+                    <p class="feature-description">Pearle makes collaboration effortless — and recognizes everyone who helps make the trip better.</p>
+                    <span class="feature-benefit">😌 Teamwork pays off.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta" id="waitlist">
+        <div class="container">
+            <h2>Ready for Stress-Free Travel?</h2>
+            <p>Join thousands of travelers who are done with the old way of planning trips.</p>
+            <div class="waitlist-stats">🎯 3,247 people in line ahead of you</div>
+            <a href="#" class="btn-primary" onclick="handleWaitlistSignup()">Get First Access + Free Planning Guide</a>
+            <p class="launch-info">Coming Fall 2025 • No spam, just travel magic ✨</p>
+        </div>
+        <div class="social-links">
+          <a href="https://instagram.com/pearlesocial" target="_blank" aria-label="Instagram">
+            <img src="instagram-icon.svg" alt="Instagram" />
+          </a>
+          <a href="mailto:courtney@pearlesocial.com" aria-label="Email">
+            <img src="email-icon.svg" alt="Email" />
+          </a>
+          <a href="https://linkedin.com/company/pearlesocial" target="_blank" aria-label="LinkedIn">
+            <img src="linkedin-icon.svg" alt="LinkedIn" />
+          </a>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Waitlist signup
+        function handleWaitlistSignup() {
+            alert('This would connect to your email service (Mailchimp, ConvertKit, etc.)');
+        }
+
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .problem-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
